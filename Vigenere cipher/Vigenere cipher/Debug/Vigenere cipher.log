@@ -1,0 +1,3 @@
+﻿  Vigenere cipher.c
+C:\Users\hyen\source\repos\Vigenere cipher\Vigenere cipher\Vigenere cipher.c(11,6): warning C4013: 'gets'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+  Vigenere cipher.vcxproj -> C:\Users\hyen\source\repos\Vigenere cipher\Debug\Vigenere cipher.exe

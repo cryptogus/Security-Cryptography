@@ -1,0 +1,13 @@
+﻿  Feistel.c
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(26,10): warning C4477: 'scanf_s' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int *'입니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(26,10): message : 이 인수는 변환 지정자에서 사용됩니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(29,2): error C2146: 구문 오류: ';'이(가) 'printf' 식별자 앞에 없습니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(64,13): warning C4552: '&': 식의 결과가 사용되지 않습니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(136,12): error C2065: 'input': 선언되지 않은 식별자입니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(138,17): error C2065: 'input': 선언되지 않은 식별자입니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(140,17): error C2065: 'input': 선언되지 않은 식별자입니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(142,17): error C2065: 'input': 선언되지 않은 식별자입니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(144,17): error C2065: 'input': 선언되지 않은 식별자입니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(146,17): error C2065: 'input': 선언되지 않은 식별자입니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(148,17): error C2065: 'input': 선언되지 않은 식별자입니다.
+C:\Users\hyen\source\repos\Feustel 암호프로그램(2 라운드)\Feustel 암호프로그램(2 라운드)\Feistel.c(150,17): error C2065: 'input': 선언되지 않은 식별자입니다.

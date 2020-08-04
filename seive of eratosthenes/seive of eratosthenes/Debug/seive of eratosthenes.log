@@ -1,0 +1,5 @@
+﻿  seive of eratosthenes.c
+C:\Users\hyen\source\repos\seive of eratosthenes\seive of eratosthenes\seive of eratosthenes.c(24,20): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'unsigned __int64'입니다.
+C:\Users\hyen\source\repos\seive of eratosthenes\seive of eratosthenes\seive of eratosthenes.c(24,20): message : 서식 문자열에서 '%lld'을(를) 사용하는 것이 좋습니다.
+C:\Users\hyen\source\repos\seive of eratosthenes\seive of eratosthenes\seive of eratosthenes.c(24,20): message : 서식 문자열에서 '%I64d'을(를) 사용하는 것이 좋습니다.
+  seive of eratosthenes.vcxproj -> C:\Users\hyen\source\repos\seive of eratosthenes\Debug\seive of eratosthenes.exe
