@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RSA(copy)", "RSA(copy)\RSA(copy).vcxproj", "{FB2731FC-EC88-4EE9-8F46-68E11E06E417}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB2731FC-EC88-4EE9-8F46-68E11E06E417}.Debug|x64.ActiveCfg = Debug|x64
+		{FB2731FC-EC88-4EE9-8F46-68E11E06E417}.Debug|x64.Build.0 = Debug|x64
+		{FB2731FC-EC88-4EE9-8F46-68E11E06E417}.Debug|x86.ActiveCfg = Debug|Win32
+		{FB2731FC-EC88-4EE9-8F46-68E11E06E417}.Debug|x86.Build.0 = Debug|Win32
+		{FB2731FC-EC88-4EE9-8F46-68E11E06E417}.Release|x64.ActiveCfg = Release|x64
+		{FB2731FC-EC88-4EE9-8F46-68E11E06E417}.Release|x64.Build.0 = Release|x64
+		{FB2731FC-EC88-4EE9-8F46-68E11E06E417}.Release|x86.ActiveCfg = Release|Win32
+		{FB2731FC-EC88-4EE9-8F46-68E11E06E417}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DC425B4A-87BA-46F3-88EF-01327DD90693}
+	EndGlobalSection
+EndGlobal
