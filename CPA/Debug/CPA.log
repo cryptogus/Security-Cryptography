@@ -1,8 +1,0 @@
-﻿  FOCPA_func.c
-C:\Users\hyen\source\repos\CPA\CPA\FOCPA_func.c(94,79): error C2065: 'byte': 선언되지 않은 식별자입니다.
-C:\Users\hyen\source\repos\CPA\CPA\FOCPA_func.c(103,72): error C2065: 'byte': 선언되지 않은 식별자입니다.
-C:\Users\hyen\source\repos\CPA\CPA\FOCPA_func.c(106,54): error C2065: 'byte': 선언되지 않은 식별자입니다.
-C:\Users\hyen\source\repos\CPA\CPA\FOCPA_func.c(148,28): error C2065: 'byte': 선언되지 않은 식별자입니다.
-C:\Users\hyen\source\repos\CPA\CPA\FOCPA_func.c(180,44): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\hyen\source\repos\CPA\CPA\FOCPA_func.c(194,42): error C2065: 'byte': 선언되지 않은 식별자입니다.
-C:\Users\hyen\source\repos\CPA\CPA\FOCPA_func.c(199,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
