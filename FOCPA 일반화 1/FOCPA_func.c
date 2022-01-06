@@ -1,5 +1,5 @@
 /*----------------------------------------------------------------------------------*/
-/*	Visual Studio 2019 »ç¿ë½Ã °æ°íÃ¢ Á¦°Å                                           */
+/*	Visual Studio 2019 ì‚¬ìš©ì‹œ ê²½ê³ ì°½ ì œê±°                                           */
 /*----------------------------------------------------------------------------------*/
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -8,7 +8,7 @@
 #include <math.h>
 #include "FOCPA.h"
 
-//ÇØ¹Ö¿şÀÌÆ® ÇÔ¼ö
+//í•´ë°ì›¨ì´íŠ¸ í•¨ìˆ˜
 unsigned int HW(unsigned long long x)
 {
 	const unsigned long long m1 = 0x5555555555555555;
@@ -22,7 +22,7 @@ unsigned int HW(unsigned long long x)
 	x += x >> 32;  //put count of each 64 bits into their lowest 8 bits
 	return x & 0x7f;
 }
-//int HW[256] = { //AES SBox±âÁØ ÇØ¹Ö¿şÀÌÆ® Å×ÀÌºí
+//int HW[256] = { //AES SBoxê¸°ì¤€ í•´ë°ì›¨ì´íŠ¸ í…Œì´ë¸”
 //  0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1, 2,
 //  2, 3, 2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 1, 2, 2, 3,
 //  2, 3, 3, 4, 2, 3, 3, 4, 3, 4, 4, 5, 2, 3, 3, 4, 3, 4,
@@ -49,24 +49,24 @@ void CPA() {
 	FILE* trace = fopen(trace_path, "rb");
 	FILE* plain = fopen(plain_path, "r");
 	
-	//µ¿ÀûÇÒ´çÀ» À§ÇÑ º¯¼ö
+	//ë™ì í• ë‹¹ì„ ìœ„í•œ ë³€ìˆ˜
 	unsigned int byte = last_byte - start_byte + 1; 
 	unsigned long long point_num = _END_POINT_ - _START_POINT_;
 	
 	trace_HEADER header;
-	fread(&header, sizeof(header), 1, trace); //¾ÕÀÇ °ª ÀĞ¾î¿À±â
-	printf(" -------------------------------ÆÄÇü Á¤º¸-------------------------------\n");
-	printf("|	ÆÄÇü°¹¼ö	:	%d				|\n", header.trace_no);
-	printf("|	Æ÷ÀÎÆ®¼ö	:	%d				|\n", header.point_no);
+	fread(&header, sizeof(header), 1, trace); //ì•ì˜ ê°’ ì½ì–´ì˜¤ê¸°
+	printf(" -------------------------------íŒŒí˜• ì •ë³´-------------------------------\n");
+	printf("|	íŒŒí˜•ê°¯ìˆ˜	:	%d				|\n", header.trace_no);
+	printf("|	í¬ì¸íŠ¸ìˆ˜	:	%d				|\n", header.point_no);
 	printf(" -----------------------------------------------------------------------\n");
-	/*ÆÄÇüÁ¤º¸ µ¿ÀûÇÒ´ç 2Â÷¿ø ¹è¿­ Æ÷ÀÎÆ®[ÆÄÇü°³¼ö][Æ÷ÀÎÆ®°³¼ö]
+	/*íŒŒí˜•ì •ë³´ ë™ì í• ë‹¹ 2ì°¨ì› ë°°ì—´ í¬ì¸íŠ¸[íŒŒí˜•ê°œìˆ˜][í¬ì¸íŠ¸ê°œìˆ˜]
 	double **po_trace = (double**)calloc(sizeof(double*), header.trace_no);
 	for (int i = 0; i < header.trace_no; i++) {
 		po_trace[i] = (double*)calloc(sizeof(double), header.point_no);
 	}*/
 
-	/////// Æò¹®Á¤º¸ µ¿ÀûÇÒ´ç 2Â÷¿ø ¹è¿­
-	//char **plaintext = (char**)calloc(sizeof(char*) , header.trace_no);//Æò¹®
+	/////// í‰ë¬¸ì •ë³´ ë™ì í• ë‹¹ 2ì°¨ì› ë°°ì—´
+	//char **plaintext = (char**)calloc(sizeof(char*) , header.trace_no);//í‰ë¬¸
 	//for (int i = 0; i < header.trace_no; i++) {
 	//	plaintext[i] = (char*)calloc(sizeof(char), byte);
 	//}
@@ -78,7 +78,7 @@ void CPA() {
 	//		fscanf(plain, "%hhx", &plaintext[i][j]);
 	//	}
 	//}
-	//plaintextÆÄÀÏ Àß ¹Ş¾Æ¿Ô´ÂÁö È®ÀÎ
+	//plaintextíŒŒì¼ ì˜ ë°›ì•„ì™”ëŠ”ì§€ í™•ì¸
 	/*for (int i = 0; i < header.trace_no; i++) {
 		for (int j = 0; j < byte; j++) {
 			printf("%hhx ", plaintext[i][j]);
@@ -87,44 +87,44 @@ void CPA() {
 	}*/
 
 	/************************************************************************************/
-	/*                                   º¯¼ö µ¿ÀûÇÒ´ç                                   /
+	/*                                   ë³€ìˆ˜ ë™ì í• ë‹¹                                   /
 	/************************************************************************************/
 	
-	// ºĞ¼® Æ÷ÀÎÆ® ÀúÀå
+	// ë¶„ì„ í¬ì¸íŠ¸ ì €ì¥
 	float* po_trace = (float*)calloc(sizeof(float), point_num);
-	//float* po_trace = (float*)calloc(sizeof(float), header.point_no); -> ÆÄÇü Æ÷ÀÎÆ® ÀüºÎ¸¦ ÀÌ¿ëÇÒ¶§ header.point_no º¯¼ö¸¦ ³Ö¾îÁØ´Ù
+	//float* po_trace = (float*)calloc(sizeof(float), header.point_no); -> íŒŒí˜• í¬ì¸íŠ¸ ì „ë¶€ë¥¼ ì´ìš©í• ë•Œ header.point_no ë³€ìˆ˜ë¥¼ ë„£ì–´ì¤€ë‹¤
 	
-	// Æò¹® ÀúÀå
-	unsigned char* plaintext = (unsigned char*)calloc(sizeof(unsigned char), 16); //16 ¹ÙÀÌÆ® ÀúÀå
+	// í‰ë¬¸ ì €ì¥
+	unsigned char* plaintext = (unsigned char*)calloc(sizeof(unsigned char), 16); //16 ë°”ì´íŠ¸ ì €ì¥
 
-	// Áß°£°ª
+	// ì¤‘ê°„ê°’
 	unsigned int* middle = (unsigned int*)calloc(sizeof(unsigned int), 256);
 
-	// »ó°ü°è¼öÀÇ Àı´ñ°ªÀ» ÀúÀåÇÒ º¯¼ö
+	// ìƒê´€ê³„ìˆ˜ì˜ ì ˆëŒ“ê°’ì„ ì €ì¥í•  ë³€ìˆ˜
 	float* Corr = (float*)calloc(sizeof(float),point_num);
 	
-	// ÃßÃøÇÑ ºñ¹ĞÅ° ÀúÀå
+	// ì¶”ì¸¡í•œ ë¹„ë°€í‚¤ ì €ì¥
 	unsigned int* index = (unsigned int*)calloc(sizeof(unsigned int), byte);
 
-	// »ó°ü°è¼öµéÀÇ ÃÖ´ñ°ª
+	// ìƒê´€ê³„ìˆ˜ë“¤ì˜ ìµœëŒ“ê°’
 	float* maxCorrs = (float*)calloc(sizeof(float), byte);
 	
-	// Áß°£°ª E[X] ÀúÀå
+	// ì¤‘ê°„ê°’ E[X] ì €ì¥
 	float* sum_x = (float*)calloc(sizeof(float), point_num);
 	
-	// ÆÄÇü ÃøÁ¤°ª E[Y] ÀúÀå
+	// íŒŒí˜• ì¸¡ì •ê°’ E[Y] ì €ì¥
 	float* sum_y = (float*)calloc(sizeof(float), 256);
 	
-	// E[XY] ÀúÀå
+	// E[XY] ì €ì¥
 	float** sum_xy = (float**)calloc(sizeof(float*), 256);
 	for (int i = 0; i < 256; i++) {
 		sum_xy[i] = (float*)calloc(sizeof(float), point_num);
 	}
 
-	// Áß°£°ª E[X^2] ÀúÀå
+	// ì¤‘ê°„ê°’ E[X^2] ì €ì¥
 	float* sum_x2 = (float*)calloc(sizeof(float), point_num);
 	
-	// ÆÄÇü ÃøÁ¤°ª E[Y^2] ÀúÀå
+	// íŒŒí˜• ì¸¡ì •ê°’ E[Y^2] ì €ì¥
 	float* sum_y2 = (float*)calloc(sizeof(float), 256);
 	float X;
 	float Y;
@@ -132,7 +132,7 @@ void CPA() {
 	unsigned int point;
 
 	for (int i = start_byte - 1; i < last_byte; i++) {
-		//º¯¼ö ÃÊ±âÈ­ ºÎºĞ
+		//ë³€ìˆ˜ ì´ˆê¸°í™” ë¶€ë¶„
 		float max = 0;
 		fseek(plain, 0, SEEK_SET);
 		fseek(trace, 32, SEEK_SET);
@@ -147,41 +147,41 @@ void CPA() {
 			sum_x[point] = 0;
 			sum_x2[point] = 0;
 		}
-		for (unsigned int j = 0; j < _TRACE_NUM_;/*ÀüÃ¼ ÆÄÇü¼ö¸¦ ¾µ¶§ header.trace_no*/ j++) {
+		for (unsigned int j = 0; j < _TRACE_NUM_;/*ì „ì²´ íŒŒí˜•ìˆ˜ë¥¼ ì“¸ë•Œ header.trace_no*/ j++) {
 
 			for (int j = 0; j < 16; j++) {
 				fscanf(plain, "%hhx", &plaintext[j]);
-			}//Æò¹® ¹Ş¾Æ¿À±â
+			}//í‰ë¬¸ ë°›ì•„ì˜¤ê¸°
 
-			fread(po_trace, sizeof(float), header.point_no, trace); //ÆÄÇüÁ¤º¸ ºÒ·¯¿À±â
+			fread(po_trace, sizeof(float), header.point_no, trace); //íŒŒí˜•ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸°
 
 			for (point = _START_POINT_; point < _END_POINT_; point++) {
 
-				sum_x[point - _START_POINT_] = sum_x[point- _START_POINT_] + po_trace[point]; //»ó°ü°è¼ö Xº¯¼ö °ªµéÀÇ ÇÕ
-				sum_x2[point - _START_POINT_] = sum_x2[point - _START_POINT_] + po_trace[point] * po_trace[point]; //Á¦°ö
+				sum_x[point - _START_POINT_] = sum_x[point- _START_POINT_] + po_trace[point]; //ìƒê´€ê³„ìˆ˜ Xë³€ìˆ˜ ê°’ë“¤ì˜ í•©
+				sum_x2[point - _START_POINT_] = sum_x2[point - _START_POINT_] + po_trace[point] * po_trace[point]; //ì œê³±
 			}
 
 			for (unsigned int key = 0; key < 0x100; key++) {
 
-				middle[key] = HW(S_Box[plaintext[i] ^ key]); //subbyte ÇØ¹Ö¿şÀÌÆ®°ª
+				middle[key] = HW(S_Box[plaintext[i] ^ key]); //subbyte í•´ë°ì›¨ì´íŠ¸ê°’
 				sum_y[key] = sum_y[key] + middle[key];
 				for (point = _START_POINT_; point < _END_POINT_; point++) {
-					sum_xy[key][point - _START_POINT_] = sum_xy[key][point - _START_POINT_] + po_trace[point] * middle[key]; //xyÀÇ ÇÕ
+					sum_xy[key][point - _START_POINT_] = sum_xy[key][point - _START_POINT_] + po_trace[point] * middle[key]; //xyì˜ í•©
 				}
 
 				sum_y2[key] = sum_y2[key] + middle[key] * middle[key];
 			}
-			//ÃÖ´ë »ó°ü°è¼ö°ª ±¸ÇÏ±â
+			//ìµœëŒ€ ìƒê´€ê³„ìˆ˜ê°’ êµ¬í•˜ê¸°
 		}
 		for (unsigned int key = 0; key < 0x100; key++) {
 			int k = 0;
 			
 			for (point = 0; point < point_num; point++) {
-				//nÀº ºĞ¼®ÇÒ ÆÄÇü ¹üÀ§(ÀüÃ¼ °¹¼ö)
-				X = (point_num) * sum_x2[point] - (sum_x[point] * sum_x[point]);
-				Y = (point_num) * sum_y2[key] - (sum_y[key] * sum_y[key]);
-				XY = (point_num) * sum_xy[key][point] - (sum_x[point] * sum_y[key]);
-				Corr[k] = fabs(XY / sqrt((float)X * Y));// »ó°ü°ü°è Àı´ñ°ª
+				//nì€ ë¶„ì„í•  íŒŒí˜• ë²”ìœ„(ì „ì²´ ê°¯ìˆ˜)
+				X = (_TRACE_NUM_) * sum_x2[point] - (sum_x[point] * sum_x[point]);
+				Y = (_TRACE_NUM_) * sum_y2[key] - (sum_y[key] * sum_y[key]);
+				XY = (_TRACE_NUM_) * sum_xy[key][point] - (sum_x[point] * sum_y[key]);
+				Corr[k] = fabs(XY / sqrt((float)X * Y));// ìƒê´€ê´€ê³„ ì ˆëŒ“ê°’
 
 				if (Corr[k] > max) {
 					max = Corr[k];
@@ -195,7 +195,7 @@ void CPA() {
 
 	}
 
-	printf("ÃßÃøÇÑ Å°°ª: ");
+	printf("ì¶”ì¸¡í•œ í‚¤ê°’: ");
 	for (int i = (start_byte - 1); i < last_byte; i++) {
 		printf("%02x ", index[i]);
 	}
