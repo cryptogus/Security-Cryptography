@@ -106,6 +106,7 @@ void CPA() {
 	//후보키별 상관계수들의 최댓값
 	double* keymaxCorrs = (double*)calloc(sizeof(double), 256);
 
+	//1등 키의 상관계수
 	double* MaxCorrs = (double*)calloc(sizeof(double), byte);
 	
 	//1등 상관계수와 2등 상관계수의 비율
@@ -128,6 +129,10 @@ void CPA() {
 	
 	// E[Y^2] 저장
 	double* sum_y2 = (double*)calloc(sizeof(double), 256);
+
+	//두번째 후보키
+	unsigned int* second_key = (unsigned int*)calloc(sizeof(unsigned int), byte);
+	
 	unsigned int point;
 	float pointer;
 	double under_Corr = 0;
@@ -136,7 +141,10 @@ void CPA() {
 	for (int i = 0; i < byte; i++) {
 		//변수 초기화 부분
 		//Corr = 0;
-		int second_key = 0;
+		for (int a = 0; a < 256; a++)
+		{	
+			keymaxCorrs[a] = 0;
+		}
 		fseek(plain, 3 * (start_byte - 1), SEEK_SET); //평문.txt 파일은 띄어쓰기까지 총 3번 건너뛰어야함 ex)읽어 온 후 캐럿의 위치 다음에 오는게 0xff라면 "ff "만큼 건너 뛰어야함
  		fseek(trace, 32  + sizeof(float) * (_START_POINT_ - 1), SEEK_SET);
 		for (int i = 0; i < 256; i++) {
@@ -212,7 +220,7 @@ void CPA() {
 		{
 			if ((keymaxCorrs[a] > ratio[i]) && (a != index[i]))
 			{
-				second_key = a;
+				second_key[i] = a;
 				ratio[i] = keymaxCorrs[a];
 			}
 		}
@@ -229,7 +237,7 @@ void CPA() {
 	}
 	printf("\n\n");
 	for (int i = 0; i < byte; i++) {
-		printf("%02d번째 바이트 ratio %g\n", start_byte + i, ratio[i]);
+		printf("%02d번째 바이트 ratio %g   두번째 후보키: 0x%02x\n", start_byte + i, ratio[i], second_key[i]);
 	}
 	free(sum_x), free(sum_y), free(sum_x2), free(sum_y2);
 	for (int i = 0; i < point_num; i++) {
@@ -243,6 +251,7 @@ void CPA() {
 	free(plaintext);
 	free(middle);
 	free(index);
+	free(second_key);
 
 	fclose(plain);
 	fclose(trace);
