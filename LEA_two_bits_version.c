@@ -78,7 +78,7 @@ void LEA_Key_Schedule(word Key[], word rk[][6]) {
 		rk[i][5] = T[1];
 	}
 }
-//LEA 32 비트 단위
+//LEA 32 - bit 단위
 void LEA_Enc_32(word plaintext[], word Key[], word ciphertext[]) {
 	//라운드 키
 	word rk[24][6] = { 0, };
@@ -114,7 +114,7 @@ void LEA_Enc_32(word plaintext[], word Key[], word ciphertext[]) {
 	round_func(state, rk[23], ciphertext);
 	
 }
-
+//LEA 8 - bit 단위
 void LEA_Enc_8(byte plaintext[], byte Key[], byte ciphertext[]) {
 	//라운드 키
 	word rk[24][6] = { 0, };
