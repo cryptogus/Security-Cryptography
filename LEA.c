@@ -10,7 +10,6 @@
                                                                
 
 #include <stdio.h>
-#include <math.h>
 
 typedef unsigned int word;
 
