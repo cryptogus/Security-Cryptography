@@ -10,10 +10,11 @@
                                                                
 
 #include <stdio.h>
-
+#include <stdint.h>
 
 typedef unsigned char byte;
-typedef unsigned int word;
+typedef uint32_t word; //For Side Channel Attack with chipwisper 8 - bit
+
 
 //Little Endian
 #define GETU32(pt) (((word)(pt)[3] << 24) ^ ((word)(pt)[2] << 16) ^ ((word)(pt)[1] <<  8) ^ ((word)(pt)[0]))
