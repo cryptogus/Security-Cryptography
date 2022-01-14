@@ -1,11 +1,11 @@
-/****************************************************************************/
-/*								  2022.01.14								*/
-/*								LEA - 128bits								*/						   
-/*																			*/						   
-/*						  ±¹¹Î´ëÇĞ±³ Á¤º¸º¸¾È¾ÏÈ£¼öÇĞ°ú						*/						   
-/*																			*/						   
-/*									ÀÌÇöÈ£									*/						   
-/****************************************************************************/
+/************************************************************************************************************************************************/
+/*								     2022.01.14									*/
+/*								    LEA - 128bits								*/						   
+/*																		*/						   
+/*						            êµ­ë¯¼ëŒ€í•™êµ ì •ë³´ë³´ì•ˆì•”í˜¸ìˆ˜í•™ê³¼							    */						   
+/*																		*/						   
+/*									ì´í˜„í˜¸								     */						   
+/************************************************************************************************************************************************/
 
                                                                
 
@@ -20,7 +20,7 @@ typedef unsigned int word;
 #define PUTU32(ct, st) { (ct)[3] = (byte)((st) >> 24); (ct)[2] = (byte)((st) >> 16); (ct)[1] = (byte)((st) >>  8); (ct)[0] = (byte)(st); }
 
 //=====
-// ¹ÙÀÌÆ® b[16] --> ¿öµå state[4]
+// ë°”ì´íŠ¸ b[16] --> ì›Œë“œ state[4]
 void byte2state(byte b[16], word state[4]) {
 	state[0] = GETU32(b);
 	state[1] = GETU32(b + 4);
@@ -29,7 +29,7 @@ void byte2state(byte b[16], word state[4]) {
 }
 
 //=====
-// ¿öµå state[4] --> ¹ÙÀÌÆ® b[16]
+// ì›Œë“œ state[4] --> ë°”ì´íŠ¸ b[16]
 void state2byte(word state[4], byte b[16]) {
 	PUTU32(b, state[0]);
 	PUTU32(b + 4, state[1]);
@@ -38,7 +38,7 @@ void state2byte(word state[4], byte b[16]) {
 }
 
 
-/*32 ºñÆ® ¿­ xÀÇ iºñÆ® ÁÂ,¿ì ¼øÈ¯ÀÌµ¿*/
+/*32 ë¹„íŠ¸ ì—´ xì˜ ië¹„íŠ¸ ì¢Œ,ìš° ìˆœí™˜ì´ë™*/
 word ROL(word x, word i) {
 	return ((x) << (i)) | ((x) >> (32 - (i)));
 }
@@ -48,7 +48,7 @@ word ROR(word x, word i) {
 //#define ROL(x,i)  ((x)<<(i)) | ((x)>>(32 - (i)))
 //#define ROR(x,i)  ((x)>>(i)) | ((x)<<(32 - (i)))
 
-void round_func(word X[]/*input*/, word rk[]/*ÇØ´ç ¶ó¿îµåÅ°*/, word state[]/*output*/) {
+void round_func(word X[]/*input*/, word rk[]/*í•´ë‹¹ ë¼ìš´ë“œí‚¤*/, word state[]/*output*/) {
 	state[0] = ROL(((X[0] ^ rk[0]) + (X[1] ^ rk[1])) & 0xffffffff, 9);
 	state[1] = ROR(((X[1] ^ rk[2]) + (X[2] ^ rk[3])) & 0xffffffff, 5);
 	state[2] = ROR(((X[2] ^ rk[4]) + (X[3] ^ rk[5])) & 0xffffffff, 3);
@@ -57,7 +57,7 @@ void round_func(word X[]/*input*/, word rk[]/*ÇØ´ç ¶ó¿îµåÅ°*/, word state[]/*out
 
 void LEA_Key_Schedule(word Key[], word rk[][6]) {
 	word T[4] = { 0, };
-	//»ó¼ö
+	//ìƒìˆ˜
 	const word delta[8] = { 0xc3efe9db, 0x44626b02, 0x79e27c8a, 0x78df30ec, 0x715ea49e, 0xc785da0a, 0xe04ef22a,0xe5c40957 };
 	
 	T[0] = Key[0];
@@ -78,9 +78,9 @@ void LEA_Key_Schedule(word Key[], word rk[][6]) {
 		rk[i][5] = T[1];
 	}
 }
-//LEA 32 ºñÆ® ´ÜÀ§
+//LEA 32 ë¹„íŠ¸ ë‹¨ìœ„
 void LEA_Enc_32(word plaintext[], word Key[], word ciphertext[]) {
-	//¶ó¿îµå Å°
+	//ë¼ìš´ë“œ í‚¤
 	word rk[24][6] = { 0, };
 	word state[4] = { 0, };
 	word state2[4] = { 0, };
@@ -116,7 +116,7 @@ void LEA_Enc_32(word plaintext[], word Key[], word ciphertext[]) {
 }
 
 void LEA_Enc_8(byte plaintext[], byte Key[], byte ciphertext[]) {
-	//¶ó¿îµå Å°
+	//ë¼ìš´ë“œ í‚¤
 	word rk[24][6] = { 0, };
 	word WKey[4] = { 0, };
 	word state[4] = { 0, };
@@ -157,13 +157,13 @@ void LEA_Enc_8(byte plaintext[], byte Key[], byte ciphertext[]) {
 }
 int main() {
 
-	/******************************32 - bit ´ÜÀ§ Test Vector*******************************/
+	/******************************32 - bit ë‹¨ìœ„ Test Vector*******************************/
 	word Plaintext[4] = { 0x13121110, 0x17161514, 0x1b1a1918, 0x1f1e1d1c};
 	word Key[4] = { 0x3c2d1e0f, 0x78695a4b, 0xb4a59687, 0xf0e1d2c3 };
 	word Ciphertext[4] = { 0, };
 	/**************************************************************************************/
 
-	/******************************8 - bit ´ÜÀ§ Test Vector********************************/
+	/******************************8 - bit ë‹¨ìœ„ Test Vector********************************/
 	byte Plaintext2[16] = { 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f };
 	byte Key2[16] = { 0x0f, 0x1e, 0x2d, 0x3c, 0x4b, 0x5a, 0x69, 0x78, 0x87, 0x96, 0xa5, 0xb4, 0xc3, 0xd2, 0xe1, 0xf0 };
 	byte Ciphertext2[16] = { 0, };
@@ -183,7 +183,7 @@ int main() {
 	printf("%02x ", Ciphertext2[3]);
 	/**************************************************************************************/
 
-	/*¶ó¿îµå ÇÔ¼ö Å×½ºÆ®*/
+	/*ë¼ìš´ë“œ í•¨ìˆ˜ í…ŒìŠ¤íŠ¸*/
 	//word rk[24][6] = { 0, };
 	//LEA_Key_Schedule(Key, rk);
 	//word TRUE_ROUND_KEY[24][6] = {
@@ -217,7 +217,7 @@ int main() {
 	//	for (int j = 0; j < 6; j++) {
 	//		if (rk[i][j] != TRUE_ROUND_KEY[i][j]) {
 	//			//system(1);
-	//			printf("¶ó¿îµå Å° °ªÀÌ Æ²·È½À´Ï´Ù.\n");
+	//			printf("ë¼ìš´ë“œ í‚¤ ê°’ì´ í‹€ë ¸ìŠµë‹ˆë‹¤.\n");
 	//		}
 	//	}
 	//}
