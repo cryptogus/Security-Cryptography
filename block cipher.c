@@ -1,20 +1,20 @@
-#include <stdio.h>																		  /**************************ÁÖÀÇ*****************************/
-#include <string.h>																		  //¾ÏÈ£È­¿¬»êµéÀº  ¹«Á¶°Ç paddingÀ» Çß´Ù´Â °¡Á¤ÇÏ¿¡ ÄÚµå¸¦ Â«.
+#include <stdio.h>																		  /**************************ì£¼ì˜*****************************/
+#include <string.h>																		  //ì•”í˜¸í™”ì—°ì‚°ë“¤ì€  ë¬´ì¡°ê±´ paddingì„ í–ˆë‹¤ëŠ” ê°€ì •í•˜ì— ì½”ë“œë¥¼ ì§¬.
 #include <stdlib.h>																		  //
 #include <time.h>																		  //
 																						  //
 int Byte;
 
-//CTR¸ğµå´Â µû·Î key, IV test vector°¡ ÀÖ´Ù , vectorÂü°í »çÀÌÆ®https://www.cnblogs.com/shangdawei/p/4589924.html
+//CTRëª¨ë“œëŠ” ë”°ë¡œ key, IV test vectorê°€ ìˆë‹¤ , vectorì°¸ê³  ì‚¬ì´íŠ¸https://www.cnblogs.com/shangdawei/p/4589924.html
 
 unsigned char key[16] = { 0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,0xab,0xf7,0x15,0x88,0x09,0xcf,0x4f,0x3c };
 unsigned char IV[16] = { 0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0a,0x0b,0x0c,0x0d,0x0e,0x0f };
 
-/////////////////////////////////ECB¸ğµå test vetor////////////////////////////////////////////////////////////
+/////////////////////////////////ECBëª¨ë“œ test vetor////////////////////////////////////////////////////////////
 unsigned char ECB_plainText[16] = { 0x6b,0xc1,0xbe,0xe2,0x2e,0x40,0x9f,0x96,0xe9,0x3d,0x7e,0x11,0x73,0x93,0x17,0x2a };
 unsigned char ECB_CipherText[16] = { 0x3a,0xd7,0x7b,0xb4,0x0d,0x7a,0x36,0x60,0xa8,0x9e,0xca,0xf3,0x24,0x66,0xef,0x97 };
 
-/////////////////////////////CBC¸ğµå test vector////////////////////////////////
+/////////////////////////////CBCëª¨ë“œ test vector////////////////////////////////
 unsigned char CBC_plainText[16] = { 0x6b,0xc1,0xbe,0xe2,0x2e,0x40,0x9f,0x96,0xe9,0x3d,0x7e,0x11,0x73,0x93,0x17,0x2a };
 unsigned char CBC_CipherText[16] = { 0x76,0x49,0xab,0xac,0x81,0x19,0xb2,0x46,0xce,0xe9,0x8e,0x9b,0x12,0xe9,0x19,0x7d };
 
@@ -27,29 +27,29 @@ unsigned char OFB_plainText[16] = { 0x6b,0xc1,0xbe,0xe2,0x2e,0x40,0x9f,0x96,0xe9
 unsigned char OFB_CipherText[16] = { 0x3b,0x3f,0xd9,0x2e,0xb7,0x2d,0xad,0x20,0x33,0x34,0x49,0xf8,0xe8,0x3c,0xfb,0x4a };
 
 
-///////////////////////////////////CTR¸ğµåÀÇ TEST Vector//////////////////////////////////////////////////////////////
+///////////////////////////////////CTRëª¨ë“œì˜ TEST Vector//////////////////////////////////////////////////////////////
 unsigned char key_ctr[16] = { 0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,0xab,0xf7,0x15,0x88,0x09,0xcf,0x4f,0x3c };		 
 unsigned char IV_ctr[16] = { 0xf0,0xf1,0xf2,0xf3,0xf4,0xf5,0xf6,0xf7,0xf8,0xf9,0xfa,0xfb,0xfc,0xfd,0xfe,0xff };
 unsigned char CTR_plainText[16] = { 0x6b,0xc1,0xbe,0xe2,0x2e,0x40,0x9f,0x96,0xe9,0x3d,0x7e,0x11,0x73,0x93,0x17,0x2a };
 unsigned char CTR_CipherText[16] = { 0x87,0x4d,0x61,0x91,0xb6,0x20,0xe3,0x26,0x1b,0xef,0x68,0x64,0x99,0x0d,0xb6,0xce };
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*************************ÆĞµù ±Ô°İ*************************/
+/*************************íŒ¨ë”© ê·œê²©*************************/
 unsigned char* PKCS_7(unsigned char* text) {
 
 
-	//////Ãß°¡ÇÒ ¹ÙÀÌÆ® ¼ö/////////////
+	//////ì¶”ê°€í•  ë°”ì´íŠ¸ ìˆ˜/////////////
 	unsigned char pad;
 	pad = 16 - (Byte % 16);
 
 	///////////////////////////////////
-	unsigned char* test1 = malloc(pad + Byte);
+	unsigned char* test1 = (unsigned char *)malloc(pad + Byte); // ë™ì í• ë‹¹ì€ ì§€ì—­ë³€ìˆ˜ì²˜ëŸ¼ ìŠ¤í…ì´ ì•„ë‹ˆë¼ í™ì˜ ì˜ì—­ì— ìˆê¸°ë•Œë¬¸ì— static ì´ ì—†ì–´ë„ ì£¼ì†Œê°€ ì‚¬ë¼ì§€ì§€ ì•ŠëŠ”ë‹¤
 
 	memcpy(test1, text, Byte);
 
 	for (int i = Byte; i < Byte + pad; i++) {
 		test1[i] = pad;
 	}
-	printf("ÆĞµù : ");
+	printf("íŒ¨ë”© : ");
 	for (int i = 0; i < Byte + pad; i++) {
 		printf("%x ", test1[i]);
 	}
@@ -62,14 +62,14 @@ unsigned char* IEC(unsigned char* text) {
 	unsigned char pad;
 	pad = 16 - (Byte % 16);
 
-	unsigned char* test1 = malloc(pad + Byte);
+	unsigned char* test1 = (unsigned char *)malloc(pad + Byte);
 
 	memcpy(test1, text, Byte);
 	test1[Byte] = 0x80;
 	for (int i = Byte + 1; i < Byte + pad; i++) {
 		test1[i] = 0x00;
 	}
-	printf("ÆĞµù : ");
+	printf("íŒ¨ë”© : ");
 	for (int i = 0; i < Byte + pad; i++) {
 		printf("%x ", test1[i]);
 	}
@@ -84,7 +84,7 @@ unsigned char* ANSI(unsigned char* text) {
 	unsigned char pad;
 	pad = 16 - (Byte % 16);
 
-	unsigned char* test1 = malloc(pad + Byte);
+	unsigned char* test1 = (unsigned char *)malloc(pad + Byte);
 	memcpy(test1, text, Byte);
 
 	for (int i = Byte; i < Byte + pad; i++) {
@@ -93,7 +93,7 @@ unsigned char* ANSI(unsigned char* text) {
 
 	test1[Byte + pad - 1] = pad;
 
-	printf("ÆĞµù : ");
+	printf("íŒ¨ë”© : ");
 	for (int i = 0; i < Byte + pad; i++) {
 		printf("%x ", test1[i]);
 	}
@@ -105,37 +105,37 @@ unsigned char* ISO(unsigned char* text) {
 
 	unsigned char pad;
 
-	//////Ãß°¡ÇÒ ¹ÙÀÌÆ® ¼ö/////////////
+	//////ì¶”ê°€í•  ë°”ì´íŠ¸ ìˆ˜/////////////
 
 	pad = 16 - (Byte % 16);
-	unsigned char* test1 = malloc(pad + Byte);
+	unsigned char* test1 = (unsigned char *)malloc(pad + Byte);
 
 	///////////////////////////////////
 	memcpy(test1, text, Byte);
 
 
 	for (int i = Byte; i < Byte + pad; i++) {
-		srand(time(NULL) * i); //·£´ı°ªÀ» ´Ù¸£°Ô ÇØÁÖ±â À§ÇØ
+		srand(time(NULL) * i); //ëœë¤ê°’ì„ ë‹¤ë¥´ê²Œ í•´ì£¼ê¸° ìœ„í•´
 		test1[i] = rand() % 256;
 	}
 	test1[Byte + pad - 1] = pad;
-	printf("ÆĞµù : ");
+	printf("íŒ¨ë”© : ");
 	for (int i = 0; i < Byte + pad; i++) {
 		printf("%x ", test1[i]);
 	}
 	return test1;
 }
-void Del(unsigned char* text) { //PKCS_7, ANSI, ISO, IEC ±Ô°İ ÆĞµù Á¦°Å
+void Del(unsigned char* text) { //PKCS_7, ANSI, ISO, IEC ê·œê²© íŒ¨ë”© ì œê±°
 
 
-	//////Á¦°ÅÇÒ ¹ÙÀÌÆ® ¼ö/////////////
+	//////ì œê±°í•  ë°”ì´íŠ¸ ìˆ˜/////////////
 	unsigned char del;
-	del = text[15]; // ¾ÏÈ£¹® decryptÀÌÈÄ °¡Àå ³¡ÀÚ¸® ÆĞµùµÈ ¹ÙÀÌÆ® Å©±â
+	del = text[15]; // ì•”í˜¸ë¬¸ decryptì´í›„ ê°€ì¥ ëìë¦¬ íŒ¨ë”©ëœ ë°”ì´íŠ¸ í¬ê¸°
 
 	////////////////////////////////////////
 
 
-	////IEC padding Á¦°Å½Ã »ç¿ëÇÒ ±¸¹® - ÀÌ ÆĞµùÀº °¡Àå ³¡ÀÌ 0ÀÌ±â¶§¹®¿¡ 0ÀÌ ¾Æ´Ñ ÆĞµùµéÀº »ç¿ëµÇÁö ¾ÊÀ½
+	////IEC padding ì œê±°ì‹œ ì‚¬ìš©í•  êµ¬ë¬¸ - ì´ íŒ¨ë”©ì€ ê°€ì¥ ëì´ 0ì´ê¸°ë•Œë¬¸ì— 0ì´ ì•„ë‹Œ íŒ¨ë”©ë“¤ì€ ì‚¬ìš©ë˜ì§€ ì•ŠìŒ
 	for (int a = 0; ; a++) {																	   //
 		if (text[15 - a] == 0)																   //
 			del++;																				   //
@@ -148,7 +148,7 @@ void Del(unsigned char* text) { //PKCS_7, ANSI, ISO, IEC ±Ô°İ ÆĞµù Á¦°Å
 	}																						   //
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
-	unsigned char* test1 = malloc(15 - del);
+	unsigned char* test1 = (unsigned char *)malloc(15 - del);
 
 	memcpy(test1, text, Byte - del);
 
@@ -171,16 +171,16 @@ void AES_En(unsigned char cipherText[16], unsigned char plainText[16], unsigned 
 void AES_De(unsigned char cipherText[16], unsigned char plainText[16], unsigned char key[16]);
 
 int main() {
-	printf("ÀÔ·ÂÇÒ TEXTÀÇ BYTEÅ©±â ÀÔ·Â(test vector´Â 16 byte) : ");
+	printf("ì…ë ¥í•  TEXTì˜ BYTEí¬ê¸° ì…ë ¥(test vectorëŠ” 16 byte) : ");
 	scanf_s("%hd", &Byte);
 																														 
-	/*unsigned char* plaintext = (char*)malloc(sizeof(char) * Byte);														 
-	printf("Æò¹®Àº 16Áø¼ö·Î ÀÔ·Â : ");																					 
+	/*unsigned char* plaintext = (unsigned char*)malloc(sizeof(char) * Byte);														 
+	printf("í‰ë¬¸ì€ 16ì§„ìˆ˜ë¡œ ì…ë ¥ : ");																					 
 	for (int i = 0; i < Byte; i++) {																					 
 																														 
 		scanf_s("%hhx", &plaintext[i]);																					 
 	}
-	printf("IV°ª ÀÔ·Â : ");
+	printf("IVê°’ ì…ë ¥ : ");
 	for (int i = 0; i < Byte; i++) {															    
 																									
 		scanf_s("%hhx", &IV[i]);																    
@@ -188,86 +188,87 @@ int main() {
 																									
 	
 
-	/*°°Àº ¿î¿ë¸ğµåÀÇ ¾Ïº¹È£È­¸¦ °°ÀÌ µ¹¸®Áö ¸»°Í*/ 
-	// ¾ÏÈ£È­´Â paddingÀÌ µÇ¾ú´Ù´Â Çß´Ù´Â °¡Á¤ÇÏ¿¡ 16byteÀÔ·Â½Ã 1ºí·°ÀÌ ´õ ³ª¿È
+	/*ê°™ì€ ìš´ìš©ëª¨ë“œì˜ ì•”ë³µí˜¸í™”ë¥¼ ê°™ì´ ëŒë¦¬ì§€ ë§ê²ƒ*/ 
+	// ì•”í˜¸í™”ëŠ” paddingì´ ë˜ì—ˆë‹¤ëŠ” í–ˆë‹¤ëŠ” ê°€ì •í•˜ì— 16byteì…ë ¥ì‹œ 1ë¸”ëŸ­ì´ ë” ë‚˜ì˜´
 	
-	ECB(ECB_plainText);									 //-- ¾ÏÈ£È­ Å×½ºÆ®
-	printf("\nºñ±³ÇÒ Text Vector°ª : ");
+	ECB(ECB_plainText);									 //-- ì•”í˜¸í™” í…ŒìŠ¤íŠ¸
+	printf("\në¹„êµí•  Text Vectorê°’ : ");
 	for (int i = 0; i < 16; i++) {
 		printf("%x ",ECB_CipherText[i]);
 	}
 	/*
-	ECB(ECB_CipherText);										//--º¹È£È­ Å×½ºÆ®
-	printf("\nText Vector°ª : ");
+	ECB(ECB_CipherText);										//--ë³µí˜¸í™” í…ŒìŠ¤íŠ¸
+	printf("\nText Vectorê°’ : ");
 	for (int i = 0; i < 16; i++) {
 		printf("%x ", ECB_plainText[i]);
 	}*/
 	
 	/*CBC_en(CBC_plainText);
-	printf("\nText Vector°ª : ");									 //-- ¾ÏÈ£È­ Å×½ºÆ®
+	printf("\nText Vectorê°’ : ");									 //-- ì•”í˜¸í™” í…ŒìŠ¤íŠ¸
 	for (int i = 0; i < 16; i++) {
 		printf("%x ", CBC_CipherText[i]);
 	}*/
 	
 	/*
-	CBC_de(CBC_CipherText);													//--º¹È£È­ Å×½ºÆ®
-	printf("\nText Vector°ª : ");
+	CBC_de(CBC_CipherText);													//--ë³µí˜¸í™” í…ŒìŠ¤íŠ¸
+	printf("\nText Vectorê°’ : ");
 	for (int i = 0; i < 16; i++) {
 		printf("%x ", CBC_plainText[i]);
 	}*/
 	
 	/*
-	CFB(CFB_plainText);														  // -- ¾ÏÈ£È­ Å×½ºÆ®
-	printf("\nText Vector°ª : ");
+	CFB(CFB_plainText);														  // -- ì•”í˜¸í™” í…ŒìŠ¤íŠ¸
+	printf("\nText Vectorê°’ : ");
 	for (int i = 0; i < 16; i++) {
 		printf("%x ", CFB_CipherText[i]);
 	}*/
 
 	/*
-	CFB(CFB_CipherText);														//  --º¹È£È­ Å×½ºÆ®
-	printf("\nText Vector°ª : ");
+	CFB(CFB_CipherText);														//  --ë³µí˜¸í™” í…ŒìŠ¤íŠ¸
+	printf("\nText Vectorê°’ : ");
 	for (int i = 0; i < 16; i++) {
 		printf("%x ", CFB_plainText[i]);
 	}*/
 	/*
 	OFB(OFB_plainText);
-	printf("\nText Vector°ª : ");
+	printf("\nText Vectorê°’ : ");
 	for (int i = 0; i < 16; i++) {
 		printf("%x ", OFB_CipherText[i]);
 	}*/
 	
 	/*
 	OFB(OFB_CipherText);
-	printf("\nText Vector°ª : ");
+	printf("\nText Vectorê°’ : ");
 	for (int i = 0; i < 16; i++) {
 		printf("%x ", OFB_plainText[i]);
 	}*/
 	
 	/*CTR(CTR_plainText); 
-	printf("\nCTR cipher Vector°ª : ");
+	printf("\nCTR cipher Vectorê°’ : ");
 	for (int i = 0; i < 16; i++) {
 		printf("%x ", CTR_CipherText[i]);
 	}
 	/*
 	CTR(CTR_CipherText);
-	printf("\nCTR decrypt Vector°ª : ");
+	printf("\nCTR decrypt Vectorê°’ : ");
 	for (int i = 0; i < 16; i++) {
 		printf("%x ", CTR_plainText[i]);
 	}*/
+	free(test1);
 
 }
 
-void ECB(unsigned char* text) { //ECB¿î¿ë¸ğµå ¾ÏÈ£È­
+void ECB(unsigned char* text) { //ECBìš´ìš©ëª¨ë“œ ì•”í˜¸í™”
 	unsigned char cipher[16] = { 0, };
 	unsigned char plain[16] = { 0, };
 	int choose;
-	printf("ECB encrypt - 1, decrypt - 2 À» ÀÔ·Â : ");
+	printf("ECB encrypt - 1, decrypt - 2 ì„ ì…ë ¥ : ");
 	scanf_s("%d", &choose);
 
 	if (choose == 1) {
 
-		//Byte / 16 + 1 Àº ÆĞµù °í·ÁÇÑ ºí·° ¼ö
-		printf("ECB ¾ÏÈ£¹® : ");
+		//Byte / 16 + 1 ì€ íŒ¨ë”© ê³ ë ¤í•œ ë¸”ëŸ­ ìˆ˜
+		printf("ECB ì•”í˜¸ë¬¸ : ");
 		for (int i = 0; i < Byte / 16 + 1; i++) {
 			for (int k = 0; k < 16; k++)
 				plain[k] = text[k + 16 * i];
@@ -282,15 +283,15 @@ void ECB(unsigned char* text) { //ECB¿î¿ë¸ğµå ¾ÏÈ£È­
 	}
 	else if (choose == 2) {
 
-		printf("ECB º¹È£¹® : ");
-		//¾ÏÈ£¹®Àº 16byte ´ÜÀ§·Î µé¾î¿Í¼­ Byte / 16 À» ºí·°¼ö·Î µÒ
+		printf("ECB ë³µí˜¸ë¬¸ : ");
+		//ì•”í˜¸ë¬¸ì€ 16byte ë‹¨ìœ„ë¡œ ë“¤ì–´ì™€ì„œ Byte / 16 ì„ ë¸”ëŸ­ìˆ˜ë¡œ ë‘ 
 		for (int i = 0; i < Byte / 16; i++) {
 			for (int j = 0; j < 16; j++) {
 				cipher[j] = text[j + 16 * i];
 			}
 			AES_De(plain, cipher, key);
-			if (i == (Byte / 16 - 1) && Byte > 16) { //&& Byte > 16 Á¶°ÇÀº test vector¿¡´Â ÆĞµùÀÌ ¾ÈµÇ¾î ÀÖ¾î¼­ ³ÖÀ½ ¿ø·¡´Â »©¾ßÇÔ
-				Del(plain); //  padding Á¦°ÅÇÔ¼ö
+			if (i == (Byte / 16 - 1) && Byte > 16) { //&& Byte > 16 ì¡°ê±´ì€ test vectorì—ëŠ” íŒ¨ë”©ì´ ì•ˆë˜ì–´ ìˆì–´ì„œ ë„£ìŒ ì›ë˜ëŠ” ë¹¼ì•¼í•¨
+				Del(plain); //  padding ì œê±°í•¨ìˆ˜
 				break;
 			}
 			for (int j = 0; j < 16; j++) {
@@ -307,7 +308,7 @@ void CBC_en(unsigned char* text) {
 
 	unsigned char cipher[16] = { 0, };
 	unsigned char plain[16] = { 0, };
-	printf("CBC ¾ÏÈ£¹® : ");
+	printf("CBC ì•”í˜¸ë¬¸ : ");
 	for (int i = 0; i < Byte / 16 + 1; i++) {
 
 		for(int k = 0; k < 16; k++)
@@ -330,7 +331,7 @@ void CBC_de(unsigned char* text) {
 
 	unsigned char cipher[16] = { 0, };
 	unsigned char plain[16] = { 0, };
-	printf("CBC º¹È£¹® : ");
+	printf("CBC ë³µí˜¸ë¬¸ : ");
 	for (int i = 0; i < Byte / 16; i++) {
 		for (int j = 0; j < 16; j++) {
 			cipher[j] = text[j + 16 * i];
@@ -339,9 +340,9 @@ void CBC_de(unsigned char* text) {
 		for (int j = 0; j < 16; j++) {
 			plain[j] = plain[j] ^ IV[j];
 		}
-		//i == (Byte / 16 - 1)Àº ¾ÏÈ£¹®ÀÇ ¸¶Áö¸· ºí·°
-		if (i == (Byte / 16 - 1) && Byte > 16) {//&&  Byte > 16 Á¶°ÇÀº test vector¿¡´Â ÆĞµùÀÌ ¾ÈµÇ¾î ÀÖ¾î¼­ ³ÖÀ½ ¿ø·¡´Â »©¾ßÇÔ
-			Del(plain); // padding Á¦°Å
+		//i == (Byte / 16 - 1)ì€ ì•”í˜¸ë¬¸ì˜ ë§ˆì§€ë§‰ ë¸”ëŸ­
+		if (i == (Byte / 16 - 1) && Byte > 16) {//&&  Byte > 16 ì¡°ê±´ì€ test vectorì—ëŠ” íŒ¨ë”©ì´ ì•ˆë˜ì–´ ìˆì–´ì„œ ë„£ìŒ ì›ë˜ëŠ” ë¹¼ì•¼í•¨
+			Del(plain); // padding ì œê±°
 			break;
 		}
 		for (int j = 0; j < 16; j++) {
@@ -355,7 +356,7 @@ void CBC_de(unsigned char* text) {
 void OFB(unsigned char* text) {
 
 	int choose;
-	printf("OFB encrypt - 1, decrypt - 2 À» ÀÔ·Â : ");;
+	printf("OFB encrypt - 1, decrypt - 2 ì„ ì…ë ¥ : ");;
 	scanf_s("%d", &choose);
 	unsigned char text2[16] = { 0, };
 
@@ -367,8 +368,8 @@ void OFB(unsigned char* text) {
 		for (int j = 0; j < 16; j++) 
 			text2[j] = text[j + 16 * i] ^ IV[j];
 
-		if (i == Byte / 16 -1 && choose == 2 && Byte > 16) {//&&  Byte > 16 Á¶°ÇÀº test vector¿¡´Â ÆĞµùÀÌ ¾ÈµÇ¾î ÀÖ¾î¼­ ³ÖÀ½ ¿ø·¡´Â »©¾ßÇÔ
-			Del(text2); // padding Á¦°Å
+		if (i == Byte / 16 -1 && choose == 2 && Byte > 16) {//&&  Byte > 16 ì¡°ê±´ì€ test vectorì—ëŠ” íŒ¨ë”©ì´ ì•ˆë˜ì–´ ìˆì–´ì„œ ë„£ìŒ ì›ë˜ëŠ” ë¹¼ì•¼í•¨
+			Del(text2); // padding ì œê±°
 			break;
 		}
 		for (int j = 0; j < 16; j++) {
@@ -381,10 +382,10 @@ void CFB(unsigned char* text) {
 	unsigned char cipher[16] = { 0, };
 	unsigned char plain[16] = { 0, };
 	int choose;
-	printf("encrypt - 1, decrypt - 2 À» ÀÔ·Â : ");
+	printf("encrypt - 1, decrypt - 2 ì„ ì…ë ¥ : ");
 	scanf_s("%d", &choose);
 	if (choose == 1) {
-		printf("CFB ¾ÏÈ£¹® : ");
+		printf("CFB ì•”í˜¸ë¬¸ : ");
 		for (int i = 0; i < Byte / 16 + 1; i++) {
 			for (int k = 0; k < 16; k++)
 				plain[k] = text[k + 16 * i];
@@ -399,7 +400,7 @@ void CFB(unsigned char* text) {
 		}
 	}
 	else if(choose == 2){
-		printf("CFB º¹È£¹® : ");
+		printf("CFB ë³µí˜¸ë¬¸ : ");
 		for (int i = 0; i < Byte / 16; i++) {
 			for (int k = 0; k < 16; k++)
 				cipher[k] = text[k + 16 * i];
@@ -409,8 +410,8 @@ void CFB(unsigned char* text) {
 			for (int j = 0; j < 16; j++) {
 				plain[j] = cipher[j] ^ IV[j];
 
-				if (i == Byte / 16 - 1 && Byte > 16) {//&&  Byte > 16Á¶°ÇÀº test vector¿¡´Â ÆĞµùÀÌ ¾ÈµÇ¾î ÀÖ¾î¼­ ³ÖÀ½ ¿ø·¡´Â »©¾ßÇÔ
-					Del(plain); // padding Á¦°Å
+				if (i == Byte / 16 - 1 && Byte > 16) {//&&  Byte > 16ì¡°ê±´ì€ test vectorì—ëŠ” íŒ¨ë”©ì´ ì•ˆë˜ì–´ ìˆì–´ì„œ ë„£ìŒ ì›ë˜ëŠ” ë¹¼ì•¼í•¨
+					Del(plain); // padding ì œê±°
 					break;
 				}
 				printf("%x ", plain[j]);
@@ -428,7 +429,7 @@ void CTR(unsigned char* text) {
 	unsigned char plain[16] = { 0, };
 	unsigned int sum = 0;
 	int choose;
-	printf("encrypt -  0, decrypt - 1 À» ÀÔ·Â : ");
+	printf("encrypt -  0, decrypt - 1 ì„ ì…ë ¥ : ");
 	scanf_s("%d", &choose);
 	for (int i = 0; i < Byte / 16 + 1; i++) {
 		
@@ -437,23 +438,23 @@ void CTR(unsigned char* text) {
 		for (int j = 0; j < 16; j++) {
 			plain[j] = text[j + 16 * i];
 			cipher[j] = plain[j] ^ IV_ctr[j];
-			if (i == Byte / 16 && choose && Byte > 16) {//&& Byte > 16 Á¶°ÇÀº test vector¿¡´Â ÆĞµùÀÌ ¾ÈµÇ¾î ÀÖ¾î¼­ ³ÖÀ½ ¿ø·¡´Â »©¾ßÇÔ
-				Del(cipher); // padding Á¦°Å
+			if (i == Byte / 16 && choose && Byte > 16) {//&& Byte > 16 ì¡°ê±´ì€ test vectorì—ëŠ” íŒ¨ë”©ì´ ì•ˆë˜ì–´ ìˆì–´ì„œ ë„£ìŒ ì›ë˜ëŠ” ë¹¼ì•¼í•¨
+				Del(cipher); // padding ì œê±°
 				break;
 			}
 			printf("%x ", cipher[j]);
 			
 		}
-		if (choose && Byte == 16)				   //1ºí·° º¹È£È­½Ã ÆĞµùÀÌ ¾È µÇ¾îÀÖ´Â test vector¶§¹®¿¡ ½á³õÀº Á¶°Ç¹®(½ÇÁ¦·Ğ Áö¿ö¾ßÇÔ)
+		if (choose && Byte == 16)				   //1ë¸”ëŸ­ ë³µí˜¸í™”ì‹œ íŒ¨ë”©ì´ ì•ˆ ë˜ì–´ìˆëŠ” test vectorë•Œë¬¸ì— ì¨ë†“ì€ ì¡°ê±´ë¬¸(ì‹¤ì œë¡  ì§€ì›Œì•¼í•¨)
 			break;
 
-		for (int k = 0; k < 15; k++) { // CTRÁ¤¼ö·Î º¯Çü -- sumº¯¼ö¿¡ ÀúÀå
+		for (int k = 0; k < 15; k++) { // CTRì •ìˆ˜ë¡œ ë³€í˜• -- sumë³€ìˆ˜ì— ì €ì¥
 			sum += IV_ctr[k];
 			sum *= 2;
 		}
 		sum += IV_ctr[15]+1;// ---- CTR + 1
 		sum %= (2048 * 2 * 2 * 2 * 2 * 2);
-		for (int k = 15; k >= 0; k--) { // CTR°ªÀ» ºñÆ®·Î ¹Ù²Ş
+		for (int k = 15; k >= 0; k--) { // CTRê°’ì„ ë¹„íŠ¸ë¡œ ë°”ê¿ˆ
 			IV_ctr[k] = sum & 0x01;
 			sum = sum >> 1;
 		}
