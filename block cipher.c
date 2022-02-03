@@ -4,7 +4,7 @@
 #include <time.h>																		  //
 																						  //
 int Byte;
-
+//https://www.google.com/search?q=%EB%8F%99%EC%A0%81%ED%95%A0%EB%8B%B9+%EC%A0%84%EC%97%AD%EB%B3%80%EC%88%98&oq=%EB%8F%99%EC%A0%81%ED%95%A0%EB%8B%B9+%EC%A0%84&aqs=chrome.1.69i57j0i512j0i30j0i8i30l3.5426j0j7&sourceid=chrome&ie=UTF-8
 //CTR모드는 따로 key, IV test vector가 있다 , vector참고 사이트https://www.cnblogs.com/shangdawei/p/4589924.html
 
 unsigned char key[16] = { 0x2b,0x7e,0x15,0x16,0x28,0xae,0xd2,0xa6,0xab,0xf7,0x15,0x88,0x09,0xcf,0x4f,0x3c };
