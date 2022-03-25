@@ -91,9 +91,9 @@ word round_constant[16] = {
 
 word G_fun(word x) {
     
-    byte y[4] = { 0, };
-    byte z[4] = { 0, };
-    byte m[4] = { 0xfc, 0xf3, 0xcf, 0x3f };
+    word y[4] = { 0, };
+    word z[4] = { 0, };
+    word m[4] = { 0xfc, 0xf3, 0xcf, 0x3f };
 
    
     y[0] = SBox1[((x) & 0xff)];
@@ -242,7 +242,7 @@ void SEED_Dec(word* Plaintext, word* Key, word* Ciphertext) {
 }
 byte inv_SBox1[256] = { 0, };
 byte inv_SBox2[256] = { 0, };
-//GÀÇ ¿ªÇÔ¼ö
+//Gì˜ ì—­í•¨ìˆ˜
 word invG_fun(word x) {
     byte X[4] = { 0, };
     byte X1[4] = { 0, };
@@ -310,7 +310,7 @@ int main() {
     word A = 0;
     word B = 0;
     word C = 0;
-   /*GÀÇ ¿ªÇÔ¼ö Å×½ºÆ®*/
+   /*Gì˜ ì—­í•¨ìˆ˜ í…ŒìŠ¤íŠ¸*/
     B = G_fun(A);
     printf("%08x ", B);
     C = invG_fun(B);
