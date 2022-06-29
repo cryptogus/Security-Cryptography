@@ -460,3 +460,36 @@ void CTR(unsigned char* text) {
 		}
 	}
 }
+/*void CTR(unsigned char* text) {
+	
+	unsigned char cipher[16] = { 0, };
+	unsigned char plain[16] = { 0, };
+	unsigned int sum = 0;
+	int choose;
+	
+
+
+	for (int i = 0; i < Byte / 16; i++) {
+
+		AES_En(IV_ctr, IV_ctr, key_ctr); //IV 암호화
+
+		for (int j = 0; j < 16; j++) {
+			plain[j] = text[j + 16 * i];
+			cipher[16*i +j] = plain[j] ^ IV_ctr[j]; //암호화 블록
+			printf("%x ", cipher[j]);
+		}
+		printf("\n");
+
+		/*CTR 값 갱신*/
+		for (int k = 0; k < 15; k++) { // CTR정수로 변형 -- sum변수에 저장
+			sum += IV_ctr[k];
+			sum <<= 1;
+		}
+		sum += IV_ctr[15] + 1;// ---- CTR + 1
+		sum &= 0xFFFF;
+		for (int k = 15; k >= 0; k--) { // CTR값을 비트로 바꿈
+			IV_ctr[k] = sum & 0x01;
+			sum = sum >> 1;
+		}
+	}
+}*/
